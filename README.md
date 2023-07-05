@@ -1,3 +1,2 @@
-# DodgeKing
-Made by MinChen
-A game which player need to control a ball to avoid collide with enemies! (try to keep alive as long as possible)
+# dodge
+CS174A Project: Dodge based on the game of the same name by Atridge created for the Pico-8 game engine in 2019.

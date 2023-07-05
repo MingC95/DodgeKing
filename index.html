@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8"/>
     <link href="assets/icon.png" rel="icon">
+    <link rel="stylesheet" href="index.css">
     <title>Dodge</title>
 </head>
-<body style="background: White">
+<body style="background: #2774AE">
+<audio id="bgm" src="bgm.mp3" loop></audio>
+
 <div id="game-over-modal" class="modal">
     <div class="modal-content">
-        <h2>Dodge King!(Dodge Blocks! Keep Alive!!! )</h2>
-        <p>Your final score: <span id="final-score"></span></p>
-        <p>Last Time Survived: <span id="time-played"></span></p>
-        <button id="play-again-button">Press ENTER To Play Again</button>
+        <h2 id="title">Dodge! (Dodge Blocks! Stay Alive!!! )</h2>
+        <div id="modal-txt">
+            <button id="bgm-toggle" onclick="toggleBGM()">Toggle BGM</button>
+            <div id="txt-box">
+                <p>Your score: <span id="final-score"></span></p>
+                <p id="blank-txt"></p>
+                <p>Last Time Survived: <span id="time-played"></span></p>
+            </div>
+            <button id="play-again-button"></button>
+        </div>
     </div>
 </div>
 
@@ -20,6 +29,12 @@
 <div class="canvas-widget" id="main-canvas"></div>
 <canvas id="canvas" width="1280" height="980"></canvas>
 <script type=module>
+    /*document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            var startScreen = document.querySelector(".start-screen");
+            startScreen.classList.add("hidden");
+        }
+    });*/
     // ********************* THE ENTRY POINT OF YOUR WHOLE PROGRAM STARTS HERE *********************
     // Indicate which element on the page you want the Canvas_Widget to replace with a 3D WebGL area:
     const element_to_replace = document.querySelector("#main-canvas");
@@ -28,6 +43,29 @@
     const scenes = [Main_Scene, ...Additional_Scenes].map(scene => new scene());
     // This line creates your scene.
     new Canvas_Widget(element_to_replace, scenes);
+</script>
+<script type="text/javascript">
+    var bgm = document.getElementById("bgm");
+    var bgmToggle = document.getElementById("bgm-toggle");
+    var hasInteracted = false;
+
+    function toggleBGM() {
+        if (bgm.paused) {
+            bgm.play();
+            bgmToggle.innerHTML = "Pause BGM";
+        } else {
+            bgm.pause();
+            bgmToggle.innerHTML = "Play BGM";
+        }
+    }
+
+    // Play the BGM when the user interacts with the page
+    window.addEventListener("click", function() {
+        if (!hasInteracted) {
+            bgm.play();
+            hasInteracted = true;
+        }
+    });
 </script>
 <!--//<script src="tiny-graphics.js"></script>
 <script src="dodge.js"></script>-->
